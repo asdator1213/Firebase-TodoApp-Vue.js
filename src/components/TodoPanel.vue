@@ -26,5 +26,6 @@ export default {
         margin: 0 auto;
         padding: 10px;
         box-shadow: 0px 0px 5px black;
+        margin-bottom: 50px;
     }
 </style>

@@ -1,15 +1,19 @@
 <template>
     <li v-on:mouseover="actions = true" v-on:mouseleave="actions = false" 
     :class="{todoCompleted: todo.todoCompleted}">
-        <div>
-            <div id="completedMessage" v-if="todo.todoCompleted">
-                Completed!
+        
+            <div>
+                <div id="completedMessage" v-if="todo.todoCompleted">
+                    Completed!
+                </div>
+                <p>{{todo.todoName}}</p>
+                <transition name="fade-actions">
+                    <div v-if="actions && !todo.todoCompleted">
+                        <todo-actions :todo="todo"></todo-actions>
+                    </div>
+                </transition>
             </div>
-            <p>{{todo.todoName}}</p>
-            <div v-if="actions && !todo.todoCompleted">
-                <todo-actions :todo="todo"></todo-actions>
-            </div>
-        </div>
+        
     </li>
 </template>
 <script>
@@ -53,5 +57,12 @@ li{
     transform: rotate(9deg);
     color:red;
     letter-spacing: 5px;
+}
+.fade-actions-enter-active, .fade-actions-leave-active{
+    opacity: 1;
+    transition-duration: 0.2s;
+}
+.fade-actions-enter, .fade-actions-leave-to{
+  opacity: 0;
 }
 </style>

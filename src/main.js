@@ -10,8 +10,8 @@ Vue.config.productionTip = false
 
 Vue.use(VueFire)
 firebase.initializeApp({
-  projectId: 'Project-id',
-  databaseURL: 'database-url'
+  projectId: 'Proj-id',
+  databaseURL: 'DB-URL'
 })
 
 const firestore = firebase.firestore();
@@ -26,3 +26,15 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+export const showToastMessage = function(message) {
+  var x = document.getElementById("snackbar");
+  x.innerHTML = message;
+  x.className += " show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+export const setToastClass = function(classname){
+  const x = document.getElementById("snackbar");
+  x.setAttribute("class", classname); 
+}

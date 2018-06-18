@@ -16,6 +16,8 @@
 <script>
 import Todo from "./Todo.vue";
 import { db } from "../main";
+import {showToastMessage} from '../main';
+import {setToastClass} from '../main';
 
 export default {
   components: {
@@ -23,7 +25,7 @@ export default {
   },
   firestore() {
     return {
-      todos: db.collection("todos").orderBy("date")
+      todos: db.collection("todos").orderBy("date", "desc")
     };
   },
   data() {
@@ -39,7 +41,10 @@ export default {
         const date = new Date();
         const todoCompleted = false;
         const todoName = this.newTodo.name;
+        this.newTodo.name = '';
         db.collection("todos").add({date, todoName, todoCompleted});
+        setToastClass("alert alert-success")
+        showToastMessage("A new todo has been successfully created!");
     },
   }
 };
@@ -82,5 +87,4 @@ export default {
 input{
   font-family: 'Exo 2', sans-serif;
 }
-
 </style>
